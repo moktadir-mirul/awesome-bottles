@@ -1,9 +1,22 @@
 import React from 'react';
+import "./bottle.css"
 
 const SingleBottle = ({bottle}) => {
+    const {img, name, seller, price, stock} = bottle;
     return (
-        <div>
-            <h1>Name: {bottle.name}</h1>
+        <div className='bottle-design'>
+            <div>
+                <img className='btl-img' src={img} alt={name} />
+            </div>
+            <div>
+            <h1 className='btl-name'><strong>Name:</strong> {name}</h1>
+            <p><strong>Brand:</strong>{seller}</p>
+            <p><strong>Price:</strong>{price}</p>
+            <p><strong>Remaining Stock:</strong>{stock}</p>
+            </div>
+            <div>
+                <button>Buy Now</button>
+            </div>
         </div>
     );
 };

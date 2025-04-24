@@ -10,9 +10,11 @@ function AllBottles({bottlePromise}) {
     return(
         <div>
             <h1 className="heading nat">Number of Awesome Bottles: {bottles.length}</h1>
-            {
+          <div className="grid-design">
+          {
                 bottles.map(bottle => <SingleBottle key={bottle.id} bottle={bottle}></SingleBottle>)
             }
+          </div>
         </div>
     )
 }
