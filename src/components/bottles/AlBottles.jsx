@@ -7,7 +7,7 @@ import Cart from "../Cart/Cart";
 function AllBottles({bottlePromise}) {
 
     const bottles = use(bottlePromise);
-    const [cart, setCart] = useState(getCartFromLS());
+    const [cart, setCart] = useState([]);
 
     useEffect(() => {
         const storedItemsCart = getCartFromLS();
@@ -16,9 +16,8 @@ function AllBottles({bottlePromise}) {
             let item = bottles.find(bottle => bottle.id === bottleId)
             storedCart.push(item); 
         }
-        console.log(storedItemsCart, storedCart);
         setCart(storedCart);
-    }, [bottles, cart])
+    }, [bottles])
 
     const handleAddtoCart = (bottle) => {
         const newCart = [...cart, bottle];
@@ -31,10 +30,10 @@ function AllBottles({bottlePromise}) {
         <div>
             <h1 className="heading nat">Number of Awesome Bottles: {bottles.length}</h1>
             <h1 className="heading nat">Number of bottles in Cart: {cart.length}</h1>
-            <Cart cartItems={cart}></Cart>
+            <Cart cartItems={cart} setCart={setCart}></Cart>
           <div className="grid-design">
           {
-                bottles.map(bottle => <SingleBottle handleAddtoCart={handleAddtoCart} key={bottle.id} bottle={bottle}></SingleBottle>)
+                bottles.map(bottle => <SingleBottle  handleAddtoCart={handleAddtoCart} key={bottle.id} bottle={bottle}></SingleBottle>)
             }
           </div>
         </div>
