@@ -2,6 +2,7 @@ import React, { use, useEffect, useState } from "react";
 import './bottles.css';
 import SingleBottle from "../bottle/SingleBottle";
 import { addToLS, getCartFromLS } from "../../utility/addToLS";
+import Cart from "../Cart/Cart";
 
 function AllBottles({bottlePromise}) {
 
@@ -10,9 +11,13 @@ function AllBottles({bottlePromise}) {
 
     useEffect(() => {
         const storedItemsCart = getCartFromLS();
-        const newCart = bottles.filter((eachBottle) => storedItemsCart.includes(eachBottle.id));
-        console.log(newCart);
-        setCart(newCart);
+        let storedCart = [];
+        for (let bottleId of storedItemsCart) {
+            let item = bottles.find(bottle => bottle.id === bottleId)
+            storedCart.push(item); 
+        }
+        console.log(storedItemsCart, storedCart);
+        setCart(storedCart);
     }, [bottles])
 
     const handleAddtoCart = (bottle) => {
@@ -26,6 +31,7 @@ function AllBottles({bottlePromise}) {
         <div>
             <h1 className="heading nat">Number of Awesome Bottles: {bottles.length}</h1>
             <h1 className="heading nat">Number of bottles in Cart: {cart.length}</h1>
+            <Cart cartItems={cart}></Cart>
           <div className="grid-design">
           {
                 bottles.map(bottle => <SingleBottle handleAddtoCart={handleAddtoCart} key={bottle.id} bottle={bottle}></SingleBottle>)
