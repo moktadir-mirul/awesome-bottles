@@ -1,15 +1,25 @@
-import React, { use, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import './bottles.css';
 import SingleBottle from "../bottle/SingleBottle";
+import { addToLS, getCartFromLS } from "../../utility/addToLS";
 
 function AllBottles({bottlePromise}) {
 
     const bottles = use(bottlePromise);
     const [cart, setCart] = useState([]);
+
+    useEffect(() => {
+        const storedItemsCart = getCartFromLS();
+        const newCart = bottles.filter((eachBottle) => storedItemsCart.includes(eachBottle.id));
+        console.log(newCart);
+        setCart(newCart);
+    }, [bottles])
+
     const handleAddtoCart = (bottle) => {
         const newCart = [...cart, bottle];
         setCart(newCart);
-        alert(`${bottle.name} added to cart successfully`)
+        alert(`${bottle.name} added to cart successfully`);
+        addToLS(bottle.id);
     }
 
     return(
