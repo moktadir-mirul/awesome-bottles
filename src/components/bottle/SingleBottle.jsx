@@ -10,9 +10,9 @@ const SingleBottle = ({bottle, handleAddtoCart}) => {
             </div>
             <div>
             <h1 className='btl-name'><strong>Name:</strong> {name}</h1>
-            <p><strong>Brand:</strong>{seller}</p>
-            <p><strong>Price:</strong>{price}</p>
-            <p><strong>Remaining Stock:</strong>{stock}</p>
+            <p><strong>Brand:</strong> {seller}</p>
+            <p><strong>Price: </strong> ${price}</p>
+            <p><strong>Remaining Stock:</strong> {stock}</p>
             </div>
             <div>
                 <button onClick={() => handleAddtoCart(bottle)}>Buy Now</button>

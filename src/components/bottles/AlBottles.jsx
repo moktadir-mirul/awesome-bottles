@@ -7,7 +7,7 @@ import Cart from "../Cart/Cart";
 function AllBottles({bottlePromise}) {
 
     const bottles = use(bottlePromise);
-    const [cart, setCart] = useState([]);
+    const [cart, setCart] = useState(getCartFromLS());
 
     useEffect(() => {
         const storedItemsCart = getCartFromLS();
@@ -18,7 +18,7 @@ function AllBottles({bottlePromise}) {
         }
         console.log(storedItemsCart, storedCart);
         setCart(storedCart);
-    }, [bottles])
+    }, [bottles, cart])
 
     const handleAddtoCart = (bottle) => {
         const newCart = [...cart, bottle];
